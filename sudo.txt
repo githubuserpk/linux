@@ -1,8 +1,17 @@
 #the below command adds ec2-user to the docker group so that you dont have to type sudo every time before running each command
 sudo usermod -a -G docker ec2-user
 
-#this command lists the docker images
+#this command lists the docker images, if there are no images, it returns nothing
 docker images
 
 #list the available containers
 docker ps
+
+#to run a image
+docker run <image_name>
+
+#to run hello-world image, if it is not there it will pull the image from docker hub and run it
+docker run hello-world
+
+#now, docker images shows the output
+docker images 
