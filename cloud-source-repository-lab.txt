@@ -1,0 +1,19 @@
+#create a cloud source repository called REPO_DEMO
+gcloud source repos create REPO_DEMO
+
+#clone the repo into local directory
+gcloud source repos clone REPO_DEMO
+
+#create a file
+echo "Hello World!" > myfile.txt
+
+#commit the file
+git config --global user.email "krishnaraotadas@gmail.com"
+
+git config --global user.name "pradeep"
+
+git add myfile.txt
+git push origin master
+
+
+
