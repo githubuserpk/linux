@@ -1,0 +1,9 @@
+gsutil ls gs://cloudml-public/census/data
+
+#there are 2 files: 3.9 MB, 1.9MB
+output:
+=======
+krishnaraotadas@cloudshell:~ (pk-datalake)$ gsutil ls -l gs://cloudml-public/census/data
+   3974304  2017-02-26T02:23:11Z  gs://cloudml-public/census/data/adult.data.csv
+   1986465  2017-02-27T02:09:47Z  gs://cloudml-public/census/data/adult.test.csv
+   
