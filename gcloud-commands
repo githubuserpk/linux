@@ -1,0 +1,10 @@
+gcloud command to list the machine type
+
+#The below command gives the list of standard machine types in us west1a zone
+>gcloud compute machine-types list --filter="zone:(us-west1-a) name~'standard'"
+
+#How to list the compute regions
+gcloud compute regions list
+
+#How to list the compute zones 
+gcloud compute zones list
