@@ -1,3 +1,6 @@
+Terraform uses service account to create a compute engine and a default network:
+================================================================================
+
 1. create file main.tf config file with following entries
    a. specify entry for provider ie google
    b. specify entry for resource (ie vm)
