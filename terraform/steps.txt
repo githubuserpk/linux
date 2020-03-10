@@ -1,0 +1,15 @@
+1. create file main.tf config file with following entries
+   a. specify entry for provider ie google
+   b. specify entry for resource (ie vm)
+   c. specify entry for network  (ie vpc)
+
+2. create a service-account called terraform-sa and give following privileges.
+   a. Project Editor
+   b. Compute Admin 
+   c. Compute Network Admin
+
+3. >terraform run 
+
+4. >terraform apply 
+
+5. >terraform destroy 
