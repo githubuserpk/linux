@@ -1,3 +1,5 @@
+#reference url: https://cloud.google.com/storage/docs/uploading-objects#storage-upload-object-code-sample
+
 from google.cloud import storage
 client = storage.Client()
 # https://console.cloud.google.com/storage/browser/[bucket-id]/
