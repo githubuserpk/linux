@@ -1,0 +1,8 @@
+1. create a folder for your project called gcp_env for eg: d:\pk\scripts\python\gcp_env
+2. cd to d:\pk\scripts\python\gcp_env
+3. run the command to create the virtualenv called venv 
+> py -m venv env
+4. activate the venv that you just created
+> .\venv\Scripts\activate
+5. now install the gcs module
+> pip install google-cloud-storage
