@@ -1,0 +1,25 @@
+#free tier: 10 gb is free
+======================================================================================================================
+consider a topic mytopic with steady inflow of 1 MiB/sec.  The subscriber mysubscriber is consuming messages steadily at 1 MiB/sec.
+The subscriber is configured to keep the messages for 7d ie to retain the acknowledged messages for 7d
+message growth: 1 MiB/second x 3600 seconds/hour x 24 hours/day = 86.4 GiB/day
+After 7d the total volume settles at 7 days x 86.4 GiB/day = 605 GiB
+
+So, the monthly cost would be: 605 GiB-month x $0.27/GiB-month = $163
+======================================================================================================================
+
+
+
+#run this after creating billing export in bigquery
+
+SELECT TIMESTAMP_TRUNC(usage_start_time, day) as usage_date,
+  sku.description,
+  usage.unit,
+  sum(usage.amount) as egress_volume
+FROM `BILLING_EXPORT_TABLE`
+WHERE
+  _PARTITIONTIME >= TIMESTAMP("2019-01-01")
+  AND service.description = "Cloud Pub/Sub"
+  AND (sku.description like "Internet data%"
+      OR sku.description like "Inter-region data%")
+GROUP BY usage_date, sku.description, usage.unit;
