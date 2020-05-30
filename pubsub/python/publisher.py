@@ -16,7 +16,6 @@
 
 """This application demonstrates how to perform basic operations on topics
 with the Cloud Pub/Sub API.
-
 For more information, see the README.md under /pubsub and the documentation
 at https://cloud.google.com/pubsub/docs.
 """
@@ -106,7 +105,22 @@ def publish_messages(project_id, topic_name):
     # [END pubsub_publish]
 
 
+def publish_messages_with_custom_attributes(project_id, topic_name):
+    """publish with custom attributes"""
 
+
+def publish_messages_with_retry_settings(project_id, topic_name):
+
+    """publish with custom attributes"""
+def publish_messages_with_error_handler(project_id, topic_name):
+    """publish with custom attributes"""
+
+def publish_messages_with_custom_attributes(project_id, topic_name):
+    """publish with custom attributes"""
+
+def publish_messages_with_batch_settings(project_id, topic_name):
+    """publish with custom attributes"""
+    
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -124,6 +138,7 @@ if __name__ == "__main__":
 
     publish_parser = subparsers.add_parser("publish", help=publish_messages.__doc__)
     publish_parser.add_argument("topic_name")
+
 
     publish_with_custom_attributes_parser = subparsers.add_parser(
         "publish-with-custom-attributes",
@@ -147,7 +162,7 @@ if __name__ == "__main__":
         help=publish_messages_with_retry_settings.__doc__,
     )
     publish_with_retry_settings_parser.add_argument("topic_name")
-
+    
     args = parser.parse_args()
 
     if args.command == "list":
