@@ -1,3 +1,4 @@
+step-0: reference url: https://developers.google.com/maps/documentation/geocoding/start
 step-1: enable the geocoding api in gcp.  search for the text: geocoding and enable it
 step-2: search for APIs & Services -> Credentials -> Create Credentials -> API Key  provide key name as myapp-dev-api-key
 step-3: add key restrictions to apikey.  find out your ip address from google and mention it in the ip address and click save
