@@ -1,0 +1,39 @@
+====================================
+In this lab we
+1. create persistent disk 100 GB
+2. attack disk to instance
+3. format and mount it 
+4. seamlessly resize to 200 GB
+====================================
+
+
+create a pd with 100gb from console
+
+attach it to the instance in console
+
+#see the block storage devices
+sudo lsblk
+
+#format the disk 
+sudo mkfs.ext4 -m 0 -F -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/sdb
+
+#create the mount directory
+sudo mkdir -p /mnt/disks/mymountdir
+
+
+#mount 
+sudo mount -o discard,defaults /dev/sdb /mnt/disks/mymountdir
+
+#change perms on the disk
+sudo chmod a+w /mnt/disks/mymountdir/
+
+=====
+resize disk to 200g
+in the console edit disk and update to 200 gb and save
+
+#in instance ssh do the following
+sudo resize2fs /dev/sdc
+
+sudo lsblk
+
+
