@@ -1,2 +1,0 @@
-#the below command helps to change the ux command prompt
-export PS1="\u$ 
