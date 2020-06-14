@@ -1,0 +1,24 @@
+reference: https://rogerdudler.github.io/git-guide/
+
+1. clone the project
+> git clone https://github.com/githubuserpk/gcp.git
+
+2. to commit a file
+> git add newfile.txt
+or 
+> git add *
+
+3. to commit a file
+git commit -m "Commit message"
+
+4. to push the files to master
+git push origin master
+
+5. create a new branch
+git checkout -b feature_x
+
+6. switch back to master  
+git checkout master
+
+7. push the branch
+git push origin <branch
