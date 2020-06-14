@@ -1,3 +1,9 @@
+#=========================================================================================================================
+In this lab, we do the following.
+01. create 2 persistent disks a) orphaned disk and b) unused disk
+02. orphaned disk will initially be attached to an instance, subsequently it will be un-attached whereas unused disk is never used
+03. To save cost we delete the unused disk as it was never used and we take a snapshot of the orphaned disk and delete it
+#=========================================================================================================================
 #enable scheduler api 
 #step-01
 gcloud services enable cloudscheduler.googleapis.com
