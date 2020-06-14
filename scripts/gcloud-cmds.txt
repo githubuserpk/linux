@@ -11,3 +11,9 @@ gcloud compute zones list
 
 How to find the list of ubuntu images in gcloud
 >gcloud compute images list --filter="name~ubuntu'"
+
+gcloud config --help and gcloud help config commands are equivalent.
+
+gcloud config set compute/zone us-central1-a
+
+gcloud config set compute/region us-central1
