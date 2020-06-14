@@ -1,0 +1,74 @@
+#enable scheduler api 
+#step-01
+gcloud services enable cloudscheduler.googleapis.com
+
+#clone repos
+#step-02
+git clone https://github.com/GoogleCloudPlatform/gcf-automated-resource-cleanup.git && cd gcf-automated-resource-cleanup/
+
+#set env var
+#step-03
+export PROJECT_ID=$(gcloud config list --format 'value(core.project)' 2>/dev/null)
+WORKDIR=$(pwd)
+
+#create pds
+#step-04
+cd $WORKDIR/unattached-pd
+
+#step-05 
+export ORPHANED_DISK=orphaned-disk
+export UNUSED_DISK=unused-disk
+
+#step-06
+#create 2 disks
+gcloud beta compute disks create $ORPHANED_DISK --project=$PROJECT_ID --type=pd-standard --size=500GB --zone=us-central1-a
+
+gcloud beta compute disks create $UNUSED_DISK --project=$PROJECT_ID --type=pd-standard --size=500GB --zone=us-central1-a
+
+#list the disks
+gcloud compute disks list
+
+#create a vm and attached orphaned disk
+
+#step-07
+gcloud compute instances create disk-instance \
+--zone=us-central1-a \
+--machine-type=n1-standard-1 \
+--disk=name=$ORPHANED_DISK,device-name=$ORPHANED_DISK,mode=rw,boot=no
+
+#describe the orphaned disk
+gcloud compute disks describe $ORPHANED_DISK --zone=us-central1-a --format=json | jq
+
+note: 
+users identifies the VM that the disk is attached to.
+lastAttachTimestamp identifies when the disk was last attached to a VM.
+
+#detatch orphaned disk
+gcloud compute instances detach-disk disk-instance --device-name=$ORPHANED_DISK --zone=us-central1-a
+
+#inspect the orphaned disk
+gcloud compute disks describe $ORPHANED_DISK --zone=us-central1-a --format=json | jq
+
+#review the cloud function code 
+
+
+# we want to delete the disk if lastAttachTimestamp isn’t present—meaning this disk was never in use.
+# if lastDetachTimestamp is present and users is not there then it means the disk is currently not in use,
+
+
+#deploy the cloud function 
+gcloud functions deploy delete_unattached_pds --trigger-http --runtime=python37
+
+#capture trigger url as env var
+export FUNCTION_URL=$(gcloud functions describe delete_unattached_pds --format=json | jq -r '.httpsTrigger.url')
+
+#schedule and test the cloud function 
+gcloud scheduler jobs create http unattached-pd-job \
+--schedule="* 2 * * *" \
+--uri=$FUNCTION_URL
+
+#test the job by manually running it
+gcloud scheduler jobs run unattached-pd-job
+
+gcloud compute disks list
+
