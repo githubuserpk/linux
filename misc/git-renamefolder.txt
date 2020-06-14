@@ -1,0 +1,6 @@
+#git commands to rename a folder from /a to /b
+git clone https://github.com/githubuserpk/gcp.git
+cd gcp
+git mv bucket_operations storage
+git commit -m "rename bucket_operations to storage"
+git push
