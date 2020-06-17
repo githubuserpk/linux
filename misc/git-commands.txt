@@ -21,4 +21,9 @@ git checkout -b feature_x
 git checkout master
 
 7. push the branch
-git push origin <branch
+git push origin branch
+
+8. update your local copy 
+cd gcp in your local repository 
+git pull origin master
+
