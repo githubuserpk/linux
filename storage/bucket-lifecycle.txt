@@ -1,0 +1,6 @@
+#in the console, go to the bucket and look for the column "Life cycle" rules, click on it and set the life-cycle properties.
+
+
+gsutil lifecycle get gs://<bucket_name>
+gsutil lifecycle set <config-json-file> gs://<bucket_name>...
+
