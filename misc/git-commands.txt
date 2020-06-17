@@ -28,4 +28,19 @@ cd gcp in your local repository
 git fetch origin master  [ to refresh your local copy with latest new files ]
 git pull origin master [ gets and merges modified files also, check ]
 
+9. settings to add so that git will not ask for userid and pwd on every push to the repository
+add the last 2 lines in the .git/config file 
+
+[core]
+        repositoryformatversion = 0
+        filemode = true
+        bare = false
+[remote "origin"]
+        url = https://github.com/githubuserpk/gcp.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+[credential "https://github.com/githubuserpk/gcp.git"]
+    username = githubuserpk
 
