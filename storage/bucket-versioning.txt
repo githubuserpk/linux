@@ -1,0 +1,32 @@
+#versioning is used as a backup mechanism 
+#restore in case of accidental deletion or overwrite
+
+gsutil mb -c standard -l europe-west2 gs://myapp-dev-bucket-versioning
+
+
+#set versioning on 
+gsutil versioning set on gs://myapp-dev-bucket-versioning
+
+#set versioning off
+gsutil versioning set off gs://myapp-dev-bucket-versioning
+
+#check if it is Enabled or suspended 
+gsutil versioning get gs://myapp-dev-bucket-versioning
+
+#set enable again 
+gsutil versioning set on gs://myapp-dev-bucket-versioning
+
+#upload file make changes and upload again [ 2 versions ]
+
+#check the version numbers along with generation numbers 
+gsutil ls -a gs://myapp-dev-bucket-versioning
+
+
+#copy the older version to the destination bucket 
+gsutil cp gs://[SOURCE_BUCKET_NAME]/[SOURCE_OBJECT_NAME]#[GENERATION_NUMBER] gs://[DESTINATION_BUCKET_NAME]/[DESTINATION_OBJECT_NAME]
+
+gsutil cp gs://myapp-dev-bucket-versioning/versioned-file.txt#1592392155017746 gs://myapp-dev-bucket-processed/versioned-file.txt
+
+#make it public and view the file in browser
+gsutil acl ch -u AllUsers:R gs://myapp-dev-bucket-processed/versioned-file.txt
+
