@@ -1,0 +1,2 @@
+#the below command provides public access to the object
+gsutil acl ch -u AllUsers:R gs://[BUCKET_NAME]/[OBJECT_NAME]
