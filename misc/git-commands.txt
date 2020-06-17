@@ -25,5 +25,7 @@ git push origin branch
 
 8. update your local copy 
 cd gcp in your local repository 
-git pull origin master
+git fetch origin master  [ to refresh your local copy with latest new files ]
+git pull origin master [ gets and merges modified files also, check ]
+
 
