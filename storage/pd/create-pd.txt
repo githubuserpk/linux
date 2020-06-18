@@ -7,6 +7,8 @@ In this lab we
 ====================================
 
 
+create an instance called vm-pd-test 
+
 create a pd with 100gb from console
 
 attach it to the instance in console
@@ -36,4 +38,7 @@ sudo resize2fs /dev/sdc
 
 sudo lsblk
 
-
+cleanup: 
+detatch the disk and 
+delete the instance
+delete the disk
