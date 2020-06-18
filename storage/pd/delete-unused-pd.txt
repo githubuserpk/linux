@@ -11,6 +11,11 @@ gcloud services enable cloudscheduler.googleapis.com
 #clone repos
 #step-02
 git clone https://github.com/GoogleCloudPlatform/gcf-automated-resource-cleanup.git && cd gcf-automated-resource-cleanup/
+and 
+update the project id in the main.py 
+gcf-automated-resource-cleanup/unattached-pd/main.py
+as shown below For eg: 
+project = 'intense-cortex-278011'
 
 #set env var
 #step-03
