@@ -1,3 +1,18 @@
+#===================================================================================================================
+# script to load csv file to bigquery table
+# the source csv file is copied from the google documentation given below
+# https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#bigquery-load-table-gcs-csv-create-python
+# the .csv file is available in global gcs location: gs://cloud-samples-data/bigquery/us-states/us-states.csv
+# First 5 lines in the input file is
+
+# name,post_abbr
+# Alabama,AL
+# Alaska,AK
+# Arizona,AZ
+# Arkansas,AR
+
+#===================================================================================================================
+
 from google.cloud import bigquery
 client = bigquery.Client()
 dataset_id = 'myapp_dev_datalake'
