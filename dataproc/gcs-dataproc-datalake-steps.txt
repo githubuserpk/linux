@@ -1,0 +1,51 @@
+#Reference url: https://cloud.google.com/dataproc/docs/concepts/connectors/cloud-storage
+#Reference url: https://cloud.google.com/dataproc/docs/tutorials/gcs-connector-spark-tutorial#python
+
+
+# set environment variables
+# ======================
+
+export PROJECT=$(gcloud config get-value project)
+export BUCKET_NAME=myapp-dev-bucket-processed
+export CLUSTER=pkgcpcluster
+export REGION=us-central1
+
+echo $PROJECT $BUCKET_NAME $CLUSTER $REGION
+
+# create hadoop cluster
+# ======================
+
+gcloud dataproc clusters create ${CLUSTER} \
+    --project=${PROJECT} \
+    --region=${REGION} \
+    --single-node
+
+
+# copy file to a storage bucket 
+# ==============================
+
+gsutil cp gs://pub/shakespeare/rose.txt \
+    gs://${BUCKET_NAME}/input/rose.txt
+
+# set the region variable for dataproc cluster 
+# ============================================
+gcloud config set dataproc/region
+
+
+# submit spark dataproc job
+============================
+gcloud dataproc jobs submit pyspark word-count.py \
+    --cluster=${CLUSTER} \
+    -- gs://${BUCKET_NAME}/input/ gs://${BUCKET_NAME}/output/
+
+# view the output of the job
+============================
+gsutil cat gs://${BUCKET_NAME}/output/*
+
+
+# cleanup
+============
+gcloud dataproc clusters delete $CLUSTER
+gsutil rm gs://$BUCKET_NAME/input/*
+gsutil rm gs://$BUCKET_NAME/output/*
+
