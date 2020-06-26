@@ -1,0 +1,27 @@
+
+
+gcloud config set project [PROJECT_ID]
+
+
+gsutil ls
+
+gsutil lifecycle get gs://vm-demo-nearline-bucket/
+
+nano lifecycle_day.json
+
+		{
+		"lifecycle": {
+		  "rule": [
+		  {
+			"action": {"type": "Delete"},
+			"condition": {
+			  "age": 1
+			}
+		  }
+		]
+		}
+		}
+
+gsutil lifecycle set lifecycle_day.json gs://vm-demo-nearline-bucket/
+
+gsutil lifecycle get gs://vm-demo-nearline-bucket/
