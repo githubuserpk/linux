@@ -1,0 +1,32 @@
+
+
+/* --------Create Bucket on  Google Cloud using UI.--------------------------------------------------*/
+  
+  gcloud config set project [PROJECT_ID]
+  
+  gsutil mb gs://vm-demo-bucket/
+  
+  gsutil mb -p dlp-project-02 -c NEARLINE -l EUROPE-WEST2 -b on gs://vm-demo-nearline-bucket/
+   
+  
+----------List the buckets --------------------------------------------------------------------------
+
+	gsutil ls
+	
+----------------------- Bucket Information:  ----------------------
+
+	Usage:
+			gsutil du -s gs://vm-demo-bucket/ 
+
+	Metadata:
+	
+			gsutil ls -L -b gs://vm-demo-bucket/
+
+----------------------Copy objects from one bucket to another bucket  ----------------------
+
+	gsutil cp gs://vm-demo-bucket/* gs://vm-demo-nearline-bucket/
+	
+
+----------------------Delete Bucket: --------------------------------
+
+	gsutil rm -r gs://vm-demo-bucket
