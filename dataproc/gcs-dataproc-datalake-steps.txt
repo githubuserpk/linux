@@ -29,7 +29,7 @@ gsutil cp gs://pub/shakespeare/rose.txt \
 
 # set the region variable for dataproc cluster 
 # ============================================
-gcloud config set dataproc/region
+gcloud config set dataproc/region us-central1
 
 
 # submit spark dataproc job
