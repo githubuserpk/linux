@@ -1,0 +1,10 @@
+
+gcloud config set project [PROJECT_ID]
+
+gsutil ls
+
+gsutil versioning set on gs://vm-demo-nearline-bucket/
+
+gsutil versioning get gs://vm-demo-nearline-bucket/
+
+gsutil ls -a gs://vm-demo-nearline-bucket/
