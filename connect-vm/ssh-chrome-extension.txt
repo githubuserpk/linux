@@ -1,0 +1,23 @@
+# steps to connect to gcp vm using chrom ssh extension
+
+1. create a vm in gcp
+2. run ssh-keygen command to get the id_rsa and id_rsa.pub files in ~/.ssh folder
+3. add the id_rsa.pub contents into the instance metadata 
+4. copy the id_rsa into your local windows system D:\PK\cloud\GCP\keys also download the public key to be on a safer side, you may need it later
+5. the contents of keys folder is now
+  id_rsa
+  id_rsa.pub
+  
+6. in chrome, go to chrome://apps and click on ssh app and enter the username and public ip address
+7. Import the private key ie id_rsa and click connect.  You are now easily connected to the vm instance !!!
+
+connecting with Putty:
+======================
+1. open puttygen.exe and load the private key id_rsa
+2. now, save the private key in putty format into a filel called id_rsa-putty.ppk
+3. the contents of keys folder is now
+  id_rsa
+  id_rsa.pub
+  id_rsa-putty.ppk
+4. open putty.exe and provide the path of the id_rsa-putty.ppk file and login to the gcp vm instance.
+
