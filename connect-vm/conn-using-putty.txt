@@ -1,0 +1,9 @@
+connecting with Putty:
+======================
+1. open puttygen.exe and load the private key id_rsa
+2. now, save the private key in putty format into a filel called id_rsa-putty.ppk
+3. the contents of keys folder is now
+  id_rsa
+  id_rsa.pub
+  id_rsa-putty.ppk
+4. open putty.exe and provide the path of the id_rsa-putty.ppk file and login to the gcp vm instance.
