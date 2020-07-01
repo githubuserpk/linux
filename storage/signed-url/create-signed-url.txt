@@ -1,0 +1,1 @@
+gsutil signurl -d 10m <myapp-dev-owner-sa.json> gs://myapp-dev-bucket-processed/coupon.txt
