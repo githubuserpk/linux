@@ -1,0 +1,29 @@
+          "primitiveTransformation":{
+            "cryptoReplaceFfxFpeConfig":{
+              "cryptoKey":{
+                "unwrapped":{
+                  "key":"YWJjZGVmZ2hpamtsbW5vcA=="
+                }
+              },
+              "commonAlphabet":"NUMERIC",
+              "surrogateInfoType":{
+                "name":"PHONE_TOKEN"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "inspectConfig":{
+    "infoTypes":[
+      {
+        "name":"PHONE_NUMBER"
+      }
+    ],
+    "minLikelihood":"UNLIKELY"
+  },
+  "item":{
+    "value":"My phone number is 9880012345"
+  }
+}
