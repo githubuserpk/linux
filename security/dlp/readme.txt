@@ -37,5 +37,13 @@ curl -s \
   https://dlp.googleapis.com/v2/projects/$PROJECT_ID/content:inspect \
   -d @deid.json
 
-8
+#9. run the script to re-identify the data, replace the access token value 
+#Note: in reid.json replace the value of phone number you got when you ran the de-identify step
+#For eg: in deid.json if your phone no is 12345 and the deidentified value is 56789, then use the value 56789 in reid.json to get decoded properly
+
+curl -s \
+  -H "Authorization: Bearer ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  https://dlp.googleapis.com/v2/projects/$PROJECT_ID/content:inspect \
+  -d @reid.json
 
