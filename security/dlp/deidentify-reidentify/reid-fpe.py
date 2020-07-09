@@ -1,3 +1,15 @@
+# =========================================================================================
+# Reference url: 
+# https://cloud.google.com/dlp/docs/pseudonymization#dlp-deid-text-fpe-python
+# In this module, we have a deidentified phone number with us: 9617256398.  This is passed to the reidentify module.
+# The reidentify step takes the phone number and does a reverse tokenization using FPE format preserving encryption 
+# The output phone number returned is: 435991673
+# usage: python reid-fpe.py
+# output:
+# Passing deidentified string: 9617256398
+# phone number is 4359916732
+# reid completed!
+# =========================================================================================
 
 
 def reidentify_free_text_with_fpe_using_surrogate(
