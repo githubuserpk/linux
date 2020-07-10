@@ -20,3 +20,5 @@ For AWS:
    ssh-keygen -y -f myawsvmkp.pem > myawsvmkp.pub
 3. remove the .pem extension from the private key 
    after generating the public key just rename the .pem file without extension like this: myawsvmkp
+4. In chrome ssh window, click Import and select both the keys from the D:\pk\cloud\AWS\keys folder and specify user: ec2-user
+5. Click connect to get connect to ec2 instance.
