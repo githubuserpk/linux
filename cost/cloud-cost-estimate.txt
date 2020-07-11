@@ -1,0 +1,22 @@
+cloud storage:
+===============
+STD: 100 TB: $2500 pm
+NEAR: 100 TB: $1000 pm
+
+Bigquery:
+=========
+100 TB: $2000 pm
+500 slots: $8500 /m/yr
+
+Network:
+========
+Egress: 25 TB: $2500
+
+Compute:
+========
+RHEL, n2-standard-4, 4vcpu, 16GB RAM,
+Local SSD: 375 GB: $500 (1 yr commit)
+
+Streaming:
+==========
+Mesg vol: 1 TB/mth, backlog: 1 TB/m, snapshot backlog: 3 TB/m : $1000
