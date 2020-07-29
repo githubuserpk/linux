@@ -1,0 +1,68 @@
+PubSub Notifications for Cloud Storage:
+=======================================
+# In this lab we create following objects
+# Bucket: pk-notification-bucket 
+# PubSub Topic: noticeTopic
+# PubSub Subscription: noticeSubscription
+# Create a notification on the bucket to send notices to our topic
+# upload a file to our bucket 
+# Pull the subscription 
+# Delete the uploaded file 
+# Pull the subscription again for deleted file message 
+# Perform cleanup
+# Delete Notification
+# Delete subscription
+# Delete Topic 
+# Delete bucket
+
+#check if pubsub api is enabled
+gcloud services list --enabled | grep pubsub*
+
+#if not enabled, enable pubsub api 
+gcloud services enable pubsub.googleapis.com
+
+#create noticeTopic
+gcloud pubsub topics create noticeTopic
+
+#create noticeSubscription
+gcloud pubsub subscriptions create --topic noticeTopic noticeSubscription
+
+#create notification bucket 
+gsutil mb -c standard -l europe-west2 -p intense-cortex-278011 gs://pk-notification-bucket
+
+#create pubsub notification for buket 
+gsutil notification create -t noticeTopic -f json gs://pk-notification-bucket
+
+#list the current notifications
+gsutil notification list gs://pk-notification-bucket
+
+echo "20200729" > 20200729.txt
+gsutil cp 20200729.done gs://pk-notification-bucket
+
+##eventType=OBJECT_FINALIZE
+gcloud pubsub subscriptions pull --auto-ack noticeSubscription
+
+#pull again and now there is no message received
+gcloud pubsub subscriptions pull --auto-ack noticeSubscription
+
+gsutil rm gs://pk-notification-bucket/20200729.done
+
+gcloud pubsub subscriptions pull --auto-ack noticeSubscription
+##eventType=OBJECT_DELETE 
+
+
+#cleanup
+=========
+gsutil notification list gs://pk-notification-bucket
+
+#delete notifications
+gsutil notification delete projects/_/buckets/pk-notification-bucket/notificationConfigs/1
+
+#delete subscription
+gcloud pubsub subscriptions delete noticeSubscription
+
+#delete topic
+gcloud pubsub topics delete noticeTopic
+
+#delete bucket
+gsutil rb gs://pk-notification-bucket
