@@ -1,0 +1,1 @@
+https://codelabs.developers.google.com/codelabs/cpb101-bigquery-dataflow-streaming/index.html?index=..%2F..next17#0
