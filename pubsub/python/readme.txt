@@ -4,45 +4,37 @@
 #install the python pubsub module
 
 # step-1: upgrade and install pubsub module
-
+# This is done as part of setup scripts, ignore the step
 pip install --upgrade google-cloud-pubsub
+
 #now set the environment variable for project id
+# This is done as part of setup scripts ignore the step
 export GLOBAL_CLOUD_PROJECT=intense-cortex-278011
-
-#step-2 list and see if there are any topics created
-python publisher.py $GLOBAL_CLOUD_PROJECT list
-
-#step-3: export project id
-export GLOBAL_CLOUD_PROJECT=intense-cortex-278011
-
 
 # =========================
 # P U B L I S H E R - T O P I C 
 # =========================
-#step-4: create topic
-python publisher.py $GLOBAL_CLOUD_PROJECT create p-MyTopic
-
-#step-6: list topics
-python publisher.py $GLOBAL_CLOUD_PROJECT list
+#step-2: create topic
+we will use the previously created topic myTopic
 
 # output:
 
 # =========================
 # S U B S C R I P T I O N
 # =========================
-#step-7: create subscription
-python subscriber.py $GLOBAL_CLOUD_PROJECT create MyTopic p-MySub
+#step-3: create subscription
+we will use the previously created subscription mySubscription
 
-
-#step-8
+#step-3 publish mesg
 # ================================
 # P U B L I S H   M E S S A G E S
 # ================================
 
-gcloud pubsub topics publish p-MyTopic --message "Hello"
-gcloud pubsub topics publish p-MyTopic --message "Publisher's name is pk"
-gcloud pubsub topics publish p-MyTopic --message "Publisher likes to eat pizza"
+python publisher.py 
 
-#step-9 receive messages
-python subscriber.py $GLOBAL_CLOUD_PROJECT receive p-MySub
+#step-4 receive mesg
+# ================================
+# R E C E I V E   M E S S A G E S
+# ================================
+python subscriber.py
 
