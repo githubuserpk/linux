@@ -34,7 +34,6 @@ gcloud pubsub topics publish myTopic --message "2. customer wants to order a piz
 gcloud pubsub subscriptions pull mySubscription --auto-ack --limit=1
 
 #mesg-3
-gcloud pubsub topics publish myTopic --message "2. customer wants to order a pizza"
 gcloud pubsub topics publish myTopic --message "3. order placed"
 gcloud pubsub topics publish myTopic --message "4. order delivered"
 gcloud pubsub topics publish myTopic --message "5. customer gave thumbs up"
