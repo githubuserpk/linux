@@ -1,9 +1,11 @@
+import os
 from concurrent.futures import TimeoutError
 from google.cloud import pubsub_v1
 
 # TODO(developer)
-project_id = "intense-cortex-278011"
+project_id =os.environ['PROJECT_ID']
 subscription_id = "mySubscription"
+
 # Number of seconds the subscriber should listen for messages
 timeout = 5.0
 
