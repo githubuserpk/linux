@@ -38,6 +38,13 @@ gcloud pubsub subscriptions pull mySubscription --auto-ack --limit=1
 gcloud pubsub subscriptions pull mySubscription --auto-ack --limit=3
 
 
+# cleanup
+#delete subscription
+gcloud pubsub subscriptions delete mySubscription
+
+#delete topic
+gcloud pubsub topics delete myTopic
+
 
 
 
