@@ -4,6 +4,7 @@ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo python3 get-pip.py
 python3 --version
 pip3 --version
+# setup virtual environment venv for isolation
 # python3 -m venv venv
 # source venv/bin/activate
 # pip3 install --upgrade pip
