@@ -5,3 +5,5 @@ alias python=python3
 alias pip=pip3
 
 export GOOGLE_APPLICATION_CREDENTIALS=~/owner-sa.json
+
+export USER_ACCOUNT=$(gcloud config get-value account)
