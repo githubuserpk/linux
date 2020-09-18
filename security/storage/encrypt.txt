@@ -20,3 +20,49 @@ gcloud kms keys create "quickstart" \
 #5. validate key in the UI
 Go to Menu -> Security -> Cryptographic Keys -> here you can view the key ring and the key that you just created
 
+#6. list the key from gcloud command line to view it again
+gcloud kms keys list \
+    --location "global" \
+    --keyring "test"
+    
+output: 
+NAME                                                                                 PURPOSE          ALGORITHM                    PROTECTION_LEVEL  LABELS  PRIMARY_ID  PRIMARY_STATE
+projects/intense-cortex-278011/locations/global/keyRings/test/cryptoKeys/quickstart  ENCRYPT_DECRYPT  GOOGLE_SYMMETRIC_ENCRYPTION  SOFTWARE                  1           ENABLED
+
+
+#6. create a sample secret file
+echo -n "Some text to be encrypted" > mysecret.txt
+
+#7. encrypt the file 
+gcloud kms encrypt \
+    --location "global" \
+    --keyring "test" \
+    --key "quickstart" \
+    --plaintext-file ./mysecret.txt \
+    --ciphertext-file ./mysecret.txt.enc
+
+#8 list the files in gcloud 
+output: 
+krishnaraotadas@cloudshell:~ (intense-cortex-278011)$ ls -l mysecret*
+-rw-r--r-- 1 krishnaraotadas krishnaraotadas  25 Sep 18 20:30 mysecret.txt
+-rw-r--r-- 1 krishnaraotadas krishnaraotadas 106 Sep 18 20:31 mysecret.txt.enc
+
+#9. upload the file to cloud storage
+
+#10. download the file 
+
+#11. now, decrypt the file using kms
+gcloud kms decrypt \
+    --location "global" \
+    --keyring "test" \
+    --key "quickstart" \
+    --ciphertext-file ./mysecret.txt.enc \
+    --plaintext-file ./mysecret.txt.decrypted
+    
+#12. see the output of the file 
+cat mysecret.txt.decrypted
+
+output: [see step 6 above, the contents are the same !!! ]
+Some text to be encrypted
+
+    
