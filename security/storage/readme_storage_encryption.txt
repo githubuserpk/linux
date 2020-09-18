@@ -1,3 +1,5 @@
+Reference url: https://cloud.google.com/kms/docs/quickstart
+
 In this sample, we are going to encrypt a cloud storage file with CMEK keys.
 High level steps:
 =================
