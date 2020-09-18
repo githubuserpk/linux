@@ -1,0 +1,17 @@
+#9. upload the file to cloud storage
+
+#10. download the file 
+
+#11. now, decrypt the file using kms
+gcloud kms decrypt \
+    --location "global" \
+    --keyring "test" \
+    --key "quickstart" \
+    --ciphertext-file ./mysecret.txt.enc \
+    --plaintext-file ./mysecret.txt.decrypted
+    
+#12. see the output of the file 
+cat mysecret.txt.decrypted
+
+output: [see step 6 in encrypt.txt, the contents are the same !!! ]
+Some text to be encrypted
