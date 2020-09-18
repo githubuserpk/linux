@@ -5,3 +5,6 @@ create a virtual machine and
 change the settings during vm creation ie disk option and select "customer managed keys" access to the vm that we are creating
 now, check in the disks, you will see that the disk is encrypted.
 
+
+Another url from google
+https://cloud.google.com/compute/docs/disks/customer-managed-encryption
