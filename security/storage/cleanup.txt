@@ -1,0 +1,21 @@
+# To avoid incurring cost, view the key and delete it 
+
+#1. List the key
+=================
+gcloud kms keys versions list \
+    --location "global" \
+    --keyring "test" \
+    --key "quickstart"
+    
+output: 
+NAME                                                                                                     STATE
+projects/intense-cortex-278011/locations/global/keyRings/test/cryptoKeys/quickstart/cryptoKeyVersions/1  ENABLED
+
+
+#2. Destroy the key
+=====================
+gcloud kms keys versions destroy 1 \
+    --location "global" \
+    --keyring "test" \
+    --key "quickstart"
+    
