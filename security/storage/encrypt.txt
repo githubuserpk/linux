@@ -1,0 +1,22 @@
+#1. enable the cloud kms api from gcloud
+> gcloud services enable cloudkms.googleapis.com
+
+#2. check that the kms is indeed enabled 
+> gcloud services list | grep kms
+
+output: 
+cloudkms.googleapis.com              Cloud Key Management Service (KMS) API
+
+#3. create key ring called test and add a key called quickstart
+gcloud kms keyrings create "test" \
+    --location "global"
+
+#4. add a key called quickstart to the key ring test
+gcloud kms keys create "quickstart" \
+    --location "global" \
+    --keyring "test" \
+    --purpose "encryption"
+    
+#5. validate key in the UI
+Go to Menu -> Security -> Cryptographic Keys -> here you can view the key ring and the key that you just created
+
