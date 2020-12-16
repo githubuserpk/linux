@@ -1,0 +1,6 @@
+1. In cloud functions console create a new cloud function called hello_gcs
+2. Specify the event as "Cloud Storage" [Create / Finalize]
+3. Browse and select the bucket name: pk-datalake-bucket
+4. Deploy the function in UI
+5. copy a file called pk.txt from local to the gcs bucket.  
+6. Go to the cloud function and view the logs you will see the output that the cloud function was invoked and whatever is in the print function you see in the log output.
