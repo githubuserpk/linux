@@ -7,6 +7,9 @@
 # This is done as part of setup scripts, ignore the step
 pip install --upgrade google-cloud-pubsub
 
+#better still do the below
+pip3 install --upgrade google-cloud-pubsub
+
 #now set the environment variable for project id
 # This is done as part of setup scripts ignore the step
 export GLOBAL_CLOUD_PROJECT=intense-cortex-278011
