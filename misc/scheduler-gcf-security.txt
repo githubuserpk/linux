@@ -1,0 +1,23 @@
+In this lab we see how cloud scheduler can invoke a cloud function.
+
+Component-1: Cloud Function
+===========================
+Write a cloud function to rename the file with a timestamp in the end in the filename like this
+pk.txt 
+pk.txt.01132021 [the appended string is the date in the format DDMMYYYY ]
+capture the url to invoke the cloud function
+
+Component-2: Cloud Scheduler
+============================
+Create a cloud scheduler and schedule it to run once every minute with 5 stars * * * * * 
+Specify the http url of cloud function to be executed every minute.
+Now, invoke the cloud scheduler, you will see that the result as FAILED !!! 
+
+Component-3: Fix the failure of cloud scheduler invoking cloud function and secure it with OIDC 
+=================================================================================================
+Create a service account under IAM section called cf-invoke and specify the role "Cloud Function Invoker" 
+Now, specify the cf-invoke service account in the cloud scheduler.  This will enable cloud scheduler to invoke the cloud function successfully.
+Also, in the Auth specify "OIDC Connect" ie open Id connect that will help to exchange the tokens automatically between cloud scheduler and cloud function.
+
+
+
