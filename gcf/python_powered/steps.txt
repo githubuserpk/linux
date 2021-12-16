@@ -1,0 +1,70 @@
+Cloud functions example from codelabs:
+=======================================
+
+
+Main link: 
+https://developers.google.com/learn/topics/python
+Pick up the lab: HTTP Cloud Functions in Python
+
+direct link: 
+https://codelabs.developers.google.com/codelabs/cloud-functions-python-http?continue=https%3A%2F%2Fdevelopers.google.com%2Flearn%2Ftopics%2Fpython#7
+
+step-01: setup
+
+In this step, we setup the requirements.  run below command to enable 
+cloud functions and cloud build.  We need cloud build because, when 
+we run gcloud function deploy command, it invokes cloud build to create
+a container image: 
+
+> gcloud services enable cloudfunctions.googleapis.com cloudbuild.googleapis.com
+
+
+step-02: download code from github
+===================================
+
+Note: the codelabs asks you to download master.zip, but there is no 
+master.zip, they have to update the documentation 
+
+The below 2 steps dont work, so please move to below alternative: 
+
+curl -LO https://github.com/GoogleCloudPlatform/python-docs-samples/archive/master.zip
+unzip master.zip 
+
+alternative: 
+
+from gcloud cmd line do this: 
+> git clone https://github.com/GoogleCloudPlatform/python-docs-samples
+
+Note: This will get you the entire repository, but we need only the 
+codelabs/python_powered folder, so move codelabs/ ../ and rm -rf python-docs-samples as it is 70 mb in size as of 16-dec-2021
+
+step-03: deploy the hello_world sample
+======================================
+gcloud functions deploy hello_world \
+  --runtime python38 \
+  --trigger-http \
+  --allow-unauthenticated
+
+next, get the url and run it from curl 
+=========================================
+URL=$(gcloud functions describe hello_world --format "value(httpsTrigger.url)")
+
+curl -w "\n" $URL
+
+output: 
+Hello World!
+
+There are 2 more gcfs, see in cleanup step below to get the names
+
+
+step-04: cleanup
+=================
+gcloud functions delete hello_world --quiet
+gcloud functions delete hello_name --quiet
+gcloud functions delete python_powered --quiet
+
+No, installation of python38 or nothing was required.  It just ran as is!
+no python23 to python3.x conversion, venv etc was required !!!
+
+
+
