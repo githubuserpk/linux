@@ -8,3 +8,9 @@ npm install @google-cloud/bigquery
 
 
 step-2: node createdataset.js 
+
+source code: 
+is availabe here 
+https://www.npmjs.com/package/@google-cloud/bigquery
+and here
+https://github.com/googleapis/nodejs-bigquery/blob/main/samples/createDataset.js
