@@ -1,0 +1,11 @@
+# Steps to create a service account in project: gcp-pse, name of svc account: sa-gcp-pse
+# role assigned: storage.admin
+# create a json file for the svc account
+
+
+gcloud config unset project
+gcloud config set project gcp-pse-335012
+gcloud config list project
+gcloud iam service-accounts create sa-gcp-pse
+gcloud projects add-iam-policy-binding gcp-pse-335012 --member="serviceAccount:sa-gcp-pse@gcp-pse-335012.iam.gserviceaccount.com" --role="roles/storage.admin"
+gcloud iam service-accounts keys create sa-gcp-pse.json --iam-account=sa-gcp-pse@gcp-pse-335012.iam.gserviceaccount.com
