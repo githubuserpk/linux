@@ -1,0 +1,19 @@
+# In this sample, we use node js script to get the metadata of the buckets
+
+# step-1: install nodejs gcp storage package 
+npm install @google-cloud/storage
+
+# step-2: create the file and getbucketmetadata.js 
+The script is in below location 
+https://www.npmjs.com/package/@google-cloud/storage#using-the-client-library
+also script is in github here: 
+https://github.com/googleapis/nodejs-storage/blob/main/samples/getMetadata.js
+
+# step-3: update the bucket name to gcp-pse-bucket 
+  and upload a test.txt file to the bucket 
+
+# run the script 
+> node getbucketmetadata.js
+
+# output: 
+see output.txt 
