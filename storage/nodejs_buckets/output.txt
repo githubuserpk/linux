@@ -1,0 +1,33 @@
+admin_@cloudshell:~ (gcp-pse-335012)$ node getbucketmetadata.js
+Bucket: gcp-pse-bucket
+CacheControl: undefined
+ComponentCount: undefined
+ContentDisposition: undefined
+ContentEncoding: undefined
+ContentLanguage: undefined
+ContentType: text/plain
+CustomTime: undefined
+admin_@cloudshell:~ (gcp-pse-335012)$ node getbucketmetadata.js
+Bucket: gcp-pse-bucket
+CacheControl: undefined
+ComponentCount: undefined
+ContentDisposition: undefined
+ContentEncoding: undefined
+ContentLanguage: undefined
+ContentType: text/plain
+CustomTime: undefined
+Crc32c: KEw==
+ETag: CIf/rEAE=
+Generation: 1634425189639
+Id: gcp-pse-bucket/test.txt/16425189639
+KmsKeyName: undefined
+Md5Hash: pYkKzjCj6uwg==
+MediaLink: https://storage.googleapis.com/download/storage/v1/b/gcp-pse-bucket/o/test.txt?generation=1625189639&alt=media
+Metageneration: 1
+Name: test.txt
+Size: 19
+StorageClass: STANDARD
+TimeCreated: Fri Dec 17 2021 12:33:45 GMT+0000 (Coordinated Universal Time)
+Last Metadata Update: Fri Dec 17 2021 12:33:45 GMT+0000 (Coordinated Universal Time)
+temporaryHold: disabled
+eventBasedHold: disabled
