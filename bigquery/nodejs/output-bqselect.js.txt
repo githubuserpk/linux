@@ -1,0 +1,12 @@
+admin_@cloudshell:~ (gcp-pse-335012)$ node bqselect.js
+Query Results:
+url: https://stackoverflow.com/questions/35159967, 110426 views
+url: https://stackoverflow.com/questions/22879669, 104978 views
+url: https://stackoverflow.com/questions/10604135, 100158 views
+url: https://stackoverflow.com/questions/27060396, 84098 views
+url: https://stackoverflow.com/questions/11057219, 76822 views
+url: https://stackoverflow.com/questions/44564887, 75787 views
+url: https://stackoverflow.com/questions/39109817, 73031 views
+url: https://stackoverflow.com/questions/12482637, 71479 views
+url: https://stackoverflow.com/questions/39919815, 67792 views
+url: https://stackoverflow.com/questions/43195143, 67503 views
