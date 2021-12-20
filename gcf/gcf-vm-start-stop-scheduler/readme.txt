@@ -22,3 +22,7 @@ Pre-requisites:
 ===============
 Create a vm manually first called cf-vm in singapore region here:
 'gcp-pse-335012', zone='asia-southeast1-b', instance='cf-vm')
+
+
+Refer to source code in github here: https://github.com/salehram/gcp-cf-python-start-stop-vms
+
