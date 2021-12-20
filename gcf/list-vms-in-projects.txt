@@ -1,0 +1,47 @@
+import subprocess
+import sys
+import logging
+import threading
+import pprint
+
+logger = logging.Logger('catch_all')
+
+def execute_bash(parameters):
+    try:
+        return subprocess.check_output(parameters)
+    except Exception as e: 
+       logger.error(e) 
+       logger.error('ERROR: Looking in jupyter console for more information')
+
+
+def scan_gce(project, results_scan):
+    print('Scanning project: "{}"'.format(project))
+    se = execute_bash(['gcloud','config', 'set', 'project', project])
+    ex = execute_bash(['gcloud','compute', 'instances', 'list', '--project', project, '--format=value(name,zone, status)'])
+    list_result_vms = []
+    if ex:
+        list_vms = ex.decode("utf-8").split('\n')
+        for vm in list_vms:
+            print(vm)
+
+            if vm:
+                vm_info = vm.split('\t')
+                print('Scanning Instance: "{}" in project "{}"'.format(vm_info[0], project))
+
+
+
+def main():
+    print("Hello World!")
+    list_projects = execute_bash(['gcloud','projects', 'list', '--format=value(projectId)']).decode("utf-8").split('\n')
+    threads_project = []
+    results_scan = []
+    print(list_projects)
+    for project in list_projects :
+        print(project)
+        if len(project.rstrip()) != 0: 
+            # Do whatever you want
+            vm_names= scan_gce(project, results_scan)
+    
+
+if __name__ == "__main__":
+    main()
