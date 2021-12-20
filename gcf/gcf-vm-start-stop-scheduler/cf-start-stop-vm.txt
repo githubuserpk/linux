@@ -1,0 +1,67 @@
+gcf steps:
+==========
+
+1. enable cloud fn api
+
+2. enable cloud build api 
+
+3. create a service account cf-sa-vm-start-stop and assign CIA v1 role
+   ie Compute Engine Admin v1 role
+
+4. create a cloud fn to start and stop a vm, a python v38 fn 
+
+import googleapiclient.discovery
+
+def start_vm(request):
+    compute = googleapiclient.discovery.build('compute', 'v1')
+    result = compute.instances().start(project='gcp-pse-335012', zone='asia-southeast1-b', instance='cf-vm').execute()
+    return result
+
+import googleapiclient.discovery
+
+def stop_vm(request):
+    compute = googleapiclient.discovery.build('compute', 'v1')
+    result = compute.instances().stop(project='gcp-pse-335012', zone='asia-southeast1-b', instance='cf-vm').execute()
+    return result
+
+requirements.txt 
+google-api-python-client==1.10.0
+
+5. invoke it: 
+
+6. Put it into scheduler
+
+Scheduler: 
+stop-vm-scheduler-with-oidc-auth 
+Frequency: * */1 * * *   //this lets it run once every hour 
+specify HTTP and provide the gcf url and Add the svcaccount-2 under
+Under "Auth Header": select "Add OIDC Token" and provide the svcaccount-2 name
+
+6. Resources Info
+
+network: my-vpc-sg
+subnet : subnet-sg
+vm     : cf-vm
+
+region: asia-southeast1
+zone: asia-southeast1-b
+
+recommended next steps:
+=======================
+net-sg
+sub-sg
+gcf-vm
+
+Later:
+======
+https://asia-southeast1-gcp-pse-335012.cloudfunctions.net/stop-vm-with-auth
+-H "Authentication: Bearer $(gcloud auth print-identity-token)"
+
+
+Not working:
+============
+The invocation from gcloud commnand line is not working although I assigned the Cloud Function Invoker role
+some issue, needs to be fixed at a later point.
+
+
+
