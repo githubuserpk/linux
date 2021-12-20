@@ -18,4 +18,7 @@ svcaccount-2: "Permissions" - this is who can invoke the stop-vm gcf
 svcaccount-1: name: sa-cf-vm-start-stop assign role: Compute Instance Admin v1 
 svcaccount-2: name: sa-cf-invoker assign role: Cloud Functions Invoker
 
-
+Pre-requisites:
+===============
+Create a vm manually first called cf-vm in singapore region here:
+'gcp-pse-335012', zone='asia-southeast1-b', instance='cf-vm')
