@@ -1,0 +1,29 @@
+Step-1: create a csek bucket, note this is GMEC at bucket level 
+only the objects can be at CSEK
+gsutil mb -c regional -l asia-southeast1 gs://bkt-csek
+
+
+Step-2: generate the key using openssl as shown below
+
+admin_@cloudshell:~ (gcp-pse-335012)$ openssl rand -base64 32
+htKQ2kTfh/F4/tBjJD1dUhISTTWMlWOxtm6VzGYfmR4=
+
+Step-3: upload to the bkt-csek 
+gsutil -o 'GSUtil:encryption_key='htKQ2kTfh/F4/tBjJD1dUhISTTWMlWOxtm6VzGYfmR4= cp sample-csek.txt gs://bkt-csek
+
+Step-4: check the object encryption 
+Navigate to the bucket and see the file in console under Encryption it shows it is Customer supplied encryption
+
+Step-5: try to access without supplying the key and simulate an error
+
+gsutil cat gs://bkt-csek/sample-csek.txt
+Error: 
+slib.cloud_api.EncryptionException: Missing decryption key with SHA256 hash b'dkktTmZOx92GV1c6oKXljYsNpi0urSUPjexmCJaCZ+0='. No decryption key matches object gs://bkt-csek/sample-csek.txt
+
+Step-6: Fix the error by providing the encryption key 
+
+admin_@cloudshell:~ (gcp-pse-335012)$ gsutil -o 'GSUtil:encryption_key='htKQ2kTfh/F4/tBjJD1dUhISTTWMlWOxtm6VzGYfmR4= cat gs://bkt-csek/sample-csek.txt
+This file is using csek
+
+Note: we got the expected output
+
