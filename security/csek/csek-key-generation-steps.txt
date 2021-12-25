@@ -1,0 +1,26 @@
+csek key generation steps: 
+=========================
+Step-1: create a random key using openssl (csek-raw)
+openssl rand 32 > mykey.txt
+
+step-2: download the RSA public certificate from google 
+
+curl \
+https://cloud-certs.storage.googleapis.com/google-cloud-csek-ingress.pem \
+> gce-cert.pem
+
+step-3: Extract public key from the certificate file 
+openssl x509 -pubkey -noout -in gce-cert.pem > pubkey.pem
+
+step-4: RSA wrap your key csek-raw with public key 
+openssl rsautl -oaep -encrypt -pubin -inkey pubkey.pem -in \
+mykey.txt -out rsawrappedkey.txt
+
+step-5: Encode RSA wrapped key with base 64
+
+openssl enc -base64 -in rsawrappedkey.txt | tr -d '\n' | sed -e \
+'$a\' > rsawrapencodedkey.txt
+
+cat output: (csek-ready)
+c0NSz0asdfasfzjK/fasfsaaa......Ns07Yw3UrHZFKIWhasdfasYNrwasdf==
+
