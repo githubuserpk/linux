@@ -1,0 +1,5 @@
+resource.type="bigquery_dataset"
+resource.labels.dataset_id="bqml"
+logName="projects/kp-devops/logs/cloudaudit.googleapis.com%2Factivity"
+protoPayload.resourceName="projects/kp-devops/datasets/bqml/tables/bqlogtable"
+protoPayload.methodName: "google.cloud.bigquery.v2.TableService.InsertTable"
