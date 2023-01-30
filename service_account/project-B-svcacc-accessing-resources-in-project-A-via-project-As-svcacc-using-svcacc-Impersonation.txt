@@ -1,0 +1,51 @@
+project-A: kp-devops
+project-B: kp-ccp [054.gserviceaccount.com]
+
+Activities done in Project-A:
+================================
+Service Accounts page: 
+I created a service account in project-A called kp-devops-sov-sa@kp-devops.iam.gserviceaccount.com
+IAM page: 
+I gave the permissions to the service account
+	service usage admin
+	storage object viewer
+
+
+I gave the permissions to the kp-ccp's default GCE service account [054] following privileges
+	service account token creator
+	service account user
+
+I gave the specific human user ie krishnarao.pradeep@gmail.com following privileges
+	owner [this was already there]
+	service account token creator
+	service account user
+
+
+Logged in to project-B and tried to access:
+============================================
+gcloud:
+	gsutil -i kp-devops-sov-sa@kp-devops.iam.gserviceaccount.com gs://kp-devops
+o/p:
+gs://kp-devops/counts-00000-of-00001
+gs://kp-devops/kp-devops.txt
+gs://kp-devops/counts/
+gs://kp-devops/tmp/
+
+
+from vm service account:
+========================
+krishnarao_pradeep@kp-ccp-vm:~$ gsutil ls gs://kp-devops
+gs://kp-devops/counts-00000-of-00001
+gs://kp-devops/kp-devops.txt
+gs://kp-devops/counts/
+gs://kp-devops/tmp/
+
+krishnarao_pradeep@kp-ccp-vm:~$ gsutil -i kp-devops-sov-sa@kp-devops.iam.gserviceaccount.com ls gs://kp-devops
+WARNING: This command is using service account impersonation. All API calls will be executed as [kp-devops-sov-sa@kp-devops.iam.gserviceaccount.com].
+gs://kp-devops/counts-00000-of-00001
+gs://kp-devops/kp-devops.txt
+gs://kp-devops/counts/
+gs://kp-devops/tmp/
+
+
+

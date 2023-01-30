@@ -1,0 +1,5 @@
+from google.auth import compute_engine
+
+credentials = compute_engine.Credentials()
+
+print(credentials)
