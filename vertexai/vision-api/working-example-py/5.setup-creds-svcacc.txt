@@ -1,0 +1,8 @@
+1. create a service account from ui or gcloud called 
+vertexai-sa and download the json file 
+
+IAM: give the IAM role "Vertex AI Custom Code Service Agent"   #this has a list of 260 perms 
+
+2. setup env variable 
+gcpadmin@cloudshell:~ (kp-host)$ export GOOGLE_APPLICATION_CREDENTIALS=/home/gcpadmin/vertexai-sa . jason file 
+

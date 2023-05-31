@@ -1,0 +1,52 @@
+# here we are assigning wrong perms and getting error
+
+To simulate error set wrong perms 
+export GOOGLE_APPLICATION_CREDENTIALS=/home/gcpadmin/objectviewer-sa . jason   #this svcacc has limited perms ie object viewer
+
+gcpadmin@cloudshell:~ (kp-host)$ export GOOGLE_APPLICATION_CREDENTIALS=/home/gcpadmin/objectviewer-sa.json
+gcpadmin@cloudshell:~ (kp-host)$ python call-vision-api.py 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/dist-packages/google/api_core/grpc_helpers.py", line 72, in error_remapped_callable
+    return callable_(*args, **kwargs)
+  File "/usr/local/lib/python3.9/dist-packages/grpc/_channel.py", line 1030, in __call__
+    return _end_unary_response_blocking(state, call, False, None)
+  File "/usr/local/lib/python3.9/dist-packages/grpc/_channel.py", line 910, in _end_unary_response_blocking
+    raise _InactiveRpcError(state)  # pytype: disable=not-instantiable
+grpc._channel._InactiveRpcError: <_InactiveRpcError of RPC that terminated with:
+        status = StatusCode.PERMISSION_DENIED
+        details = "Caller does not have required permission to use project kp-host. Grant the caller the roles/serviceusage.serviceUsageConsumer role, or a custom role with the serviceusage.services.use permission, by visiting https://console.developers.google.com/iam-admin/iam/project?project=kp-host and then retry. Propagation of the new permission may take a few minutes."
+        debug_error_string = "UNKNOWN:Error received from peer ipv4:64.233.184.95:443 {grpc_message:"Caller does not have required permission to use project kp-host. Grant the caller the roles/serviceusage.serviceUsageConsumer role, or a custom role with the serviceusage.services.use permission, by visiting https://console.developers.google.com/iam-admin/iam/project?project=kp-host and then retry. Propagation of the new permission may take a few minutes.", grpc_status:7, created_time:"2023-05-31T06:21:50.201056212+00:00"}"
+>
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/gcpadmin/call-vision-api.py", line 35, in <module>
+    run_quickstart()
+  File "/home/gcpadmin/call-vision-api.py", line 24, in run_quickstart
+    response = client.label_detection(image=image)
+  File "/usr/local/lib/python3.9/dist-packages/google/cloud/vision_helpers/decorators.py", line 112, in inner
+    response = self.annotate_image(
+  File "/usr/local/lib/python3.9/dist-packages/google/cloud/vision_helpers/__init__.py", line 76, in annotate_image
+    r = self.batch_annotate_images(
+  File "/usr/local/lib/python3.9/dist-packages/google/cloud/vision_v1/services/image_annotator/client.py", line 567, in batch_annotate_images
+    response = rpc(
+  File "/usr/local/lib/python3.9/dist-packages/google/api_core/gapic_v1/method.py", line 113, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "/usr/local/lib/python3.9/dist-packages/google/api_core/grpc_helpers.py", line 74, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.PermissionDenied: 403 Caller does not have required permission to use project kp-host. Grant the caller the roles/serviceusage.serviceUsageConsumer role, or a custom role with the serviceusage.services.use permission, by visiting https://console.developers.google.com/iam-admin/iam/project?project=kp-host and then retry. Propagation of the new permission may take a few minutes. [links {
+  description: "Google developer console IAM admin"
+  url: "https://console.developers.google.com/iam-admin/iam/project?project=kp-host"
+}
+, reason: "USER_PROJECT_DENIED"
+domain: "googleapis.com"
+metadata {
+  key: "service"
+  value: "vision.googleapis.com"
+}
+metadata {
+  key: "consumer"
+  value: "projects/kp-host"
+}
+]

@@ -1,0 +1,21 @@
+Invoke the vision api py file
+
+gcpadmin@cloudshell:~ (kp-host)$ python call-vision-api.py 
+Labels:
+Cat
+Window
+Felidae
+Carnivore
+Jaw
+Small to medium-sized cats
+Gesture
+Whiskers
+Window blind
+Fawn
+
+
+
+
+
+
+  

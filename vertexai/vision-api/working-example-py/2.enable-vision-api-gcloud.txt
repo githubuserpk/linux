@@ -1,0 +1,2 @@
+gcloud services enable vision.googleapis.com
+

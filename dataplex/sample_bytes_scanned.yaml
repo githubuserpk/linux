@@ -1,0 +1,82 @@
+# The following `NONE` row filter is required. NONE means all rows 
+row_filters:
+ NONE:
+   filter_sql_expr: |-
+      True
+ # This filters for rows marked as international (INTNL).
+ INTERNATIONAL_ITEMS:
+   filter_sql_expr: |-
+      REGEXP_CONTAINS(item_id, 'INTNL')
+      #last_modified_timestamp between '2011-12-09' and '2011-12-14' and REGEXP_CONTAINS(item_id, 'INTNL')
+ # This filters rows based on partition
+ #PARTITION_ROWS:
+   #filter_sql_expr: |-
+      #last_modified_timestamp between '2011-12-09' and '2011-12-14'
+
+# Rule dimensions are optional but let you aggregate reporting.
+rule_dimensions:
+  - consistency
+  - correctness
+  - duplication
+  - completeness
+  - conformance
+  - integrity
+
+# Rules can apply to multiple tables or columns.
+rules:
+ VALUE_ZERO_OR_POSITIVE:
+   rule_type: CUSTOM_SQL_EXPR
+   dimension: correctness
+   params:
+     custom_sql_expr: |-
+       $column >= 0
+
+ VALID_ITEM_ID:
+   rule_type: REGEX
+   dimension: conformance
+   params:
+     pattern: |-
+       [A-Z]{5}[0-9]{6}
+
+ VALID_CURRENCY_ID:
+   rule_type: CUSTOM_SQL_EXPR
+   dimension: integrity
+   params:
+     custom_sql_expr: |-
+      $column in ('GBP', 'JPY')
+
+#Reference columns
+reference_columns:
+
+  ITEM_ID_REFERENCE_COLUMNS:
+    include_reference_columns:
+      - item_id
+
+# Rule bindings associate rules to columns within tables.
+rule_bindings:
+  TRANSACTION_AMOUNT_VALID:
+   entity_uri: bigquery://projects/kp-host/datasets/sales/tables/sales_orders_bytes_scanned
+   column_id: amount
+   row_filter_id: NONE
+   incremental_time_filter_column_id: last_modified_timestamp
+   reference_columns_id: ITEM_ID_REFERENCE_COLUMNS
+   rule_ids:
+     - VALUE_ZERO_OR_POSITIVE
+
+  TRANSACTION_VALID_ITEM_ID:
+   entity_uri: bigquery://projects/kp-host/datasets/sales/tables/sales_orders_bytes_scanned
+   column_id: item_id
+   row_filter_id: NONE
+   incremental_time_filter_column_id: last_modified_timestamp
+   reference_columns_id: ITEM_ID_REFERENCE_COLUMNS   #this will appear in the output table
+   rule_ids:
+     - VALID_ITEM_ID
+
+  TRANSACTION_CURRENCY_VALID:
+   entity_uri: bigquery://projects/kp-host/datasets/sales/tables/sales_orders_bytes_scanned
+   column_id: transaction_currency
+   row_filter_id: INTERNATIONAL_ITEMS
+   incremental_time_filter_column_id: last_modified_timestamp
+   reference_columns_id: ITEM_ID_REFERENCE_COLUMNS
+   rule_ids:
+     - VALID_CURRENCY_ID

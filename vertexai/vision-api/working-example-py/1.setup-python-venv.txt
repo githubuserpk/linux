@@ -1,0 +1,7 @@
+pip install virtualenv
+virtualenv <your-env>
+source <your-env>/bin/activate
+<your-env>/bin/pip install google-cloud-vision
+
+refer to this url for more details: https://cloud.google.com/python/docs/reference/vision/latest
+
