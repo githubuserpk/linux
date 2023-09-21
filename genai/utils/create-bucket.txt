@@ -8,3 +8,10 @@ export BUCKET_NAME=$PROJECT_ID"-bucket"
 
 gsutil mb -l $REGION "gs://"$BUCKET_NAME
 
+=======================
+Timestamp utility
+
+from datetime import datetime
+
+TIMESTAMP = datetime.now().strftime("%Y%m%d%H%M%S")
+print(TIMESTAMP)
