@@ -1,0 +1,20 @@
+
+
+!curl ipinfo.io
+
+Sample  output
+=================
+!curl ipinfo.io
+account_circle
+{
+  "ip": "x.y.z.w",
+  "hostname": "a.b.c.d.bc.googleusercontent.com",
+  "city": "Las Vegas",
+  "region": "Nevada",
+  "country": "US",
+  "loc": "36.1750,-115.1372",
+  "org": "AS396982 Google LLC",
+  "postal": "89111",
+  "timezone": "America/Los_Angeles",
+  "readme": "https://ipinfo.io/missingauth"
+}
