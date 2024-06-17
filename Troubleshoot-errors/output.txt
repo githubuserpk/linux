@@ -1,0 +1,7 @@
+(venv) C:\pk\gcp\genai\pkagent>
+(venv) C:\pk\gcp\genai\pkagent>python gemini-example.py
+Prompt Token Count: 6
+Prompt Character Count: 16
+Prompt Token Count: 6
+Candidates Token Count: 246
+Total Token Count: 252
