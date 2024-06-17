@@ -1,1 +1,106 @@
+When using local shell on windows to connect and run python code make sure the following are done, otherwise you keep getting this error 
+
+01. Error message received while running a simple python code to get the number of tokens in llm in the python code 
+gemini-example.py 
+
+02. Error message received is given below:
+===============================
+google.api_core.exceptions.PermissionDenied: 403 Permission 'aiplatform.endpoints.predict' denied on resource '//aiplatform.googleapis.com/projects/pkdeltaai-05/locations/us-central1/publishers/
+google/models/gemini-1.0-pro-001' (or it may not exist). [reason: "IAM_PERMISSION_DENIED"
+domain: "aiplatform.googleapis.com"
+metadata {
+  key: "resource"
+  value: "projects/pkdeltaai-05/locations/us-central1/publishers/google/models/gemini-1.0-pro-001"
+}
+metadata {
+  key: "permission"
+  value: "aiplatform.endpoints.predict"
+}
+]
+===============================
+
+03. The first thing I did was to give more and more IAM permissions. 
+I logged in to pkdeltaai.01 user and gave him Vertex AI User as the permission aiplatform.endpoints.predict was missing as per the error.
+I could not just give the leaf permission, I have grant a IAM role.  So granted the role 
+
+The same can be done from UI also, but showing the gcloud command here 
+gcloud projects add-iam-policy-binding pkdeltaai-05 \
+  --member="user:pkdeltaai.01@gmail.com" \
+  --role="roles/aiplatform.user"   #this is Vertex AI User see the documentation here: https://cloud.google.com/vertex-ai/docs/general/access-control
+
+*******AGAIN, GOT THE SAME ERROR**********
+
+3b. Frustrated at this, I logged in to pkdeltaai-05 console and checked that pkdeltaai-01 user indeed has the access
+
+*******AGAIN, GOT THE SAME ERROR**********
+
+3c. More frustrated, I now switched to user pkdeltaai-05 the main owner of the account and tried the same execution again
+
+*******AGAIN, GOT THE SAME ERROR**********
+
+04. what was done to fix the error initially, but still got the errors 
+
+4a. I was using pkdeltaai.01 user against pkdeltaai-05 project 
+verified the above by doing the following in my virtual environment
+venv> gcloud auth login
+
+*******AGAIN, GOT THE SAME ERROR**********
+
+venv> gcloud init --no-launch-browser
+also tried with 
+venv> gcloud init --console-only   # this seems to be the latest one for no browser access 
+
+*******AGAIN, GOT THE SAME ERROR**********
+
+
+4b. set the project to pkdeltaai-05
+venv> gcloud config set project PROJECT_ID
+
+*******AGAIN, GOT THE SAME ERROR**********
+
+4c. set the account
+gcloud config set account ACCOUNT
+gcloud config set account pkdeltaai-01 
+
+*******AGAIN, GOT THE SAME ERROR**********
+
+
+4d. Tried below to set the application default login # ====== This step fixed the issue
+
+(venv) C:\pk\gcp\genai\pkagent>gcloud auth application-default login
+
+The environment variable [GOOGLE_APPLICATION_CREDENTIALS] is set to:
+  [C:\pk\gcp\auth\krshnaro.pardp_gmai\application_default_credentials.json]  #====== Path-1
+Credentials will still be generated to the default location:
+  [C:\Users\Pradeep\AppData\Roaming\gcloud\application_default_credentials.json] #====== Path-2
+To use these credentials, unset this environment variable before
+running your application.
+
+Do you want to continue (Y/n)?  y
+
+(venv) C:\pk\gcp\genai\pkagent>echo %GOOGLE_APPLICATION_CREDENTIALS%
+C:\pk\gcp\auth\krshnaro.pardp_gmail\application_default_credentials.json
+
+What I did is, generated the json file in the default location to the path shown above as Path-2
+Copied that file to the location where google looks for the location ie Path-1
+Note, in Windows 11, the system variable GOOGLE_APPLICATION_CREDENTIALS path is read-only, i could not edit it [didnt want to go into the pain of editing registry so just left it as is ]
+
+This fixed the issue and finally got the output successfully as shown in output.txt.  Phew !!!, so many tries for a simple issue.
+
+Reason: Google was looking at Path1 and in it, the project id was some other project pkdeltaai-03 which I had deleted long back. This is the reason.
+So, whatever IAM perms I gave, it was not working.  Actually, the error is somewhta misleading from google. 
+
+
+other options to do if you dont want to physically copy the json file to the Path1 location, you can do the below
+gcloud auth login --cred-file=CONFIGURATION_FILE
+
+
+
+
+
+
+
+
+
+
 
