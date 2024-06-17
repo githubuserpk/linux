@@ -93,7 +93,9 @@ So, whatever IAM perms I gave, it was not working.  Actually, the error is somew
 
 other options to do if you dont want to physically copy the json file to the Path1 location, you can do the below
 gcloud auth login --cred-file=CONFIGURATION_FILE
-
+unset GOOGLE_APPLICATION_CREDENTIALS
+gcloud config unset auth/impersonate_service_account
+gcloud auth application-default login
 
 
 
