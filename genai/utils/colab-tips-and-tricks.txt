@@ -1,0 +1,15 @@
+!curl ipinfo.io   # gives the info where the colab environment is running, not where the user is located 
+
+sample output: 
+{
+  "ip": "x.y.19.28",
+  "hostname": "8.9.12.4.bc.googleusercontent.com",
+  "city": "Council Bluffs",
+  "region": "Iowa",
+  "country": "US",
+  "loc": "44.23,-95.24",
+  "org": "AS12345 Google LLC",
+  "postal": "51503",
+  "timezone": "America/Chicago",
+  "readme": "https://ipinfo.io/missingauth"
+}
