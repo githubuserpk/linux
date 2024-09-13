@@ -1,0 +1,145 @@
+summary: This readme talks about how to setup the gcloud git environment connecting to the github repository 
+helloworld-cloudbuild-trigger
+
+step-1: created an empty repo at helloworld-cloudbuild-trigger
+
+step-2: go to gcloud
+create a folder for the repo ie helloworld-cloudbuild-trigger
+
+step-3: add requirements.txt file and main.py file locally 
+see step-3 logs below
+
+step-4: initialize empty repo locally with main 
+pkdeltaai_06@cloudshell:~/helloworld-cloudbuild-trigger (pkdeltaai-06)$ git init -b main
+Initialized empty Git repository in /home/pkdeltaai_06/helloworld-cloudbuild-trigger/.git/
+
+step-5: install gh client locally 
+see step-5 logs below
+
+step-6: login with gh once 
+see step-6 logs 
+
+
+step-7: set the userid and login email to github
+pkdeltaai_06@cloudshell:~/helloworld-cloudbuild-trigger (pkdeltaai-06)$ git config --global user.name "${GITHUB_USERNAME}"
+git config --global user.email "${USER_EMAIL}"
+
+step-8: add and commit the files
+pkdeltaai_06@cloudshell:~/helloworld-cloudbuild-trigger (pkdeltaai-06)$ git commit -m "initial commit"
+[main (root-commit) f07ba01] initial commit
+ 2 files changed, 17 insertions(+)
+ create mode 100644 main.py
+ create mode 100644 requirements.txt
+
+step-9: Add main as remote origin and push the files. 
+see step-9 logs 
+
+
+step-2-logs: 
+pkdeltaai_06@cloudshell:~ (pkdeltaai-06)$ pwd
+/home/pkdeltaai_06
+pkdeltaai_06@cloudshell:~ (pkdeltaai-06)$ mkdir helloworld-cloudbuild-trigger
+
+step-3-logs: 
+=============
+pkdeltaai_06@cloudshell:~/helloworld-cloudbuild-trigger (pkdeltaai-06)$ cat > requirements.txt << "EOF"
+Flask==3.0.0
+gunicorn==20.1.0
+EOF
+
+pkdeltaai_06@cloudshell:~/helloworld-cloudbuild-trigger (pkdeltaai-06)$ touch main.py
+pkdeltaai_06@cloudshell:~/helloworld-cloudbuild-trigger (pkdeltaai-06)$ vi main.py
+main.py code
+import os
+
+from flask import Flask
+
+app = Flask(__name__)
+
+app_version = "0.0.0"
+
+@app.route("/")
+def hello_world():
+    return f"Hello! This is version {app_version} of my application."
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+
+
+step-5-logs: 
+pkdeltaai_06@cloudshell:~/helloworld-cloudbuild-trigger (pkdeltaai-06)$ curl -sS https://webi.sh/gh | sh
+
+
+>>> Welcome to Webi! - modern tools, instant installs.  <<<
+    We expect your experience to be absolutely perfect!
+
+    Success? Star it!   https://github.com/webinstall/webi-installers
+    Problem? Report it: https://github.com/webinstall/webi-installers/issues
+                        (your system is GNU/Linux/x86_64 with libc & curl+wget)
+
+Bootstrapping Webi
+    Downloading https://webi.sh/packages/webi/webi.sh
+        to ~/.local/bin/webi
+    Running ~/.local/bin/webi gh@stable
+
+Installing gh ...
+    Found  ~/.local/bin
+
+step-6 logs: 
+pkdeltaai_06@cloudshell:~/helloworld-cloudbuild-trigger (pkdeltaai-06)$ gh auth login
+? What account do you want to log into? GitHub.com
+? What is your preferred protocol for Git operations on this host? HTTPS
+? Authenticate Git with your GitHub credentials? Yes
+? How would you like to authenticate GitHub CLI? Login with a web browser
+
+! First copy your one-time code: 464C-7578
+Press Enter to open github.com in your browser... 
+https://github.com/login/device
+✓ Authentication complete.
+- gh config set -h github.com git_protocol https
+✓ Configured git protocol
+! Authentication credentials saved in plain text
+✓ Logged in as githubuserpk
+
+pkdeltaai_06@cloudshell:~/helloworld-cloudbuild-trigger (pkdeltaai-06)$ gh api user -q ".login"
+githubuserpk
+pkdeltaai_06@cloudshell:~/helloworld-cloudbuild-trigger (pkdeltaai-06)$ GITHUB_USERNAME=$(gh api user -q ".login")
+pkdeltaai_06@cloudshell:~/helloworld-cloudbuild-trigger (pkdeltaai-06)$ echo ${GITHUB_USERNAME}
+githubuserpk
+
+step-9-logs: 
+pkdeltaai_06@cloudshell:~/helloworld-cloudbuild-trigger (pkdeltaai-06)$ git remote add origin https://github.com/githubuserpk/helloworld-cloudbuild-trigger.git                                
+pkdeltaai_06@cloudshell:~/helloworld-cloudbuild-trigger (pkdeltaai-06)$ git push -u origin main
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 502 bytes | 502.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/githubuserpk/helloworld-cloudbuild-trigger.git
+ * [new branch]      main -> main
+Branch 'main' set up to track remote branch 'main' from 'origin'.
+
+
+issues faced: 
+when trying to push the files, it was giving error, so had to add remote origin (see step 9 logs) and commit and it worked fine. 
+
+pkdeltaai_06@cloudshell:~/helloworld-cloudbuild-trigger (pkdeltaai-06)$ git remote add origin https://github.com/githubuserpk/helloworld-cloudbuild-trigger.git                                
+pkdeltaai_06@cloudshell:~/helloworld-cloudbuild-trigger (pkdeltaai-06)$ git push -u origin main
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 502 bytes | 502.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/githubuserpk/helloworld-cloudbuild-trigger.git
+ * [new branch]      main -> main
+Branch 'main' set up to track remote branch 'main' from 'origin'.
+
+Reference: 
+url: https://www.cloudskillsboost.google/focuses/80415?catalog_rank=%7B%22rank%22%3A12%2C%22num_filters%22%3A0%2C%22has_search%22%3Atrue%7D&parent=catalog&search_id=36079299
+
+
+
+
