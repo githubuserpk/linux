@@ -1,0 +1,75 @@
+manually deploy docker container to cloud run using Artifact registry 
+======================================================================
+
+6 steps
+
+1. create repo in AR [ to push image later on ]
+2. Build docker image using the cmd docker build 
+3. authenticate and authorize docker with AR [to help docker talk to AR ]
+4. Tag the image
+5. push the image to AR using docker push 
+6. deploy to cloud run using console 
+
+1. create repo in console name: manualdocker2ar
+
+2. build docker image
+
+cd manualdocker2ar [ it has 2 files server.js and Dockerfile ]
+>docker build -t manualdocker2ar .
+see logs docker build
+
+3. sudo usermod -a -G docker ${USER} [ because docker needs privileged access to registry ie GAR ]
+see cloud.google.com/artifact-registry/docs/docker/authentication
+
+3a. give access for docker to the hostname of docker 
+gcloud auth configure-docker us-central1-docker.pkg.dev 
+see logs give access 
+
+Now, we are set to talk to AR 
+
+4. tag image 
+docker tag imgnm tagname [long path of our AR ]
+
+> docker tag manualdocker2ar us-central1-docker.pkg.dev/pkdeltaai-06/manualdocker2ar/manualdocker2ar
+
+note: manualdocker2ar/manualdocker2ar [first one is the repo name, second one is the image id ]
+
+
+5. push image to AR 
+> docker push us-central1-docker.pkg.dev/pkdeltaai-06/manualdocker2ar/manualdocker2ar
+
+
+
+6. deploy to Cloud run using the cloud run UI 
+
+7. cleanup the images and delete the AR 
+> docker rmi --force <img-id>
+
+congratulations! 
+
+
+
+logs: 
+======
+docker build: 
+pkdeltaai_06@cloudshell:~/manualdocker2ar (pkdeltaai-06)$ docker build -t manualdocker2ar .
+[+] Building 32.7s (8/8) FINISHED                                                                                                                                               docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                      0.0s
+
+
+give access to docker 
+WARNING: Your config file at [/home/pkdeltaai_06/.docker/config.json] contains these credential helper entries:
+
+{
+  "credHelpers": {
+    "gcr.io": "gcloud",
+    "us.gcr.io": "gcloud",
+    "eu.gcr.io": "gcloud",
+    "asia.gcr.io": "gcloud",
+….
+    "docker.us-west4.rep.pkg.dev": "gcloud",
+    "docker.us-east7.rep.pkg.dev": "gcloud"
+  }
+}
+Adding credentials for: us-central1-docker.pkg.dev
+
