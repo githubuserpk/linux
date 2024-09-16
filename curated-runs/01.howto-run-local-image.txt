@@ -6,4 +6,5 @@ files location: https://github.com/githubuserpk/manual-docker
 This is just a server.js file with hello world sample 
 
 Locally you can download it and run server.js 
+> node server.js
 
