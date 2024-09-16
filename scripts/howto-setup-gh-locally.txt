@@ -7,3 +7,6 @@ gh auth login  # will give you a browser url to login and you need to enter 8 di
 gh api user -q ".login"
 GITHUB_USERNAME=$(gh api user -q ".login")   # output: githubuserpk
 gh repo clone githubuserpk/manual-docker     # to clone manual-docker repo locally 
+
+
+note: use the k.p@gmail.com as userid
