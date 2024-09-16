@@ -15,7 +15,7 @@ main steps:
 
 detailed steps:
 ===============
-gh repo clone githubuserpk/manual-docker
+gh repo clone githubuserpk/manual-docker   [ see below how to setup gh cli locally ] 
 docker server.js
 
 logs:
@@ -26,6 +26,15 @@ New connection
 New connection
 
 Now, open the terminal and change port to 9000 and run it, you will see the output "hello cloud run blah blah" 
+
+how to setup gh locally:
+=========================
+curl -sS https://webi.sh/gh | sh
+gh auth login  # will give you a browser url to login and you need to enter 8 digit code displayed on cmd line
+gh api user -q ".login"
+GITHUB_USERNAME=$(gh api user -q ".login")   # output: githubuserpk
+gh repo clone githubuserpk/manual-docker     # to clone manual-docker repo locally 
+
 
 
 
