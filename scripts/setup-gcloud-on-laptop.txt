@@ -55,9 +55,9 @@ Reachability Check passed.
 Network diagnostic passed (1/1 checks passed).
 
 Choose the account you would like to use to perform operations for this configuration:
- [1] admin@learngcp.xyz
- [2] gcpadmin@ilearngcp.xyz
- [3] john@pkgcp.uk
+ [1] adm@lrngcp.xyz
+ [2] gcpadm@ilrngcp.xyz
+ [3] jon@pkgcp.uk
  [4] k.p@gmail.com
  [5] pkd.01@gmail.com
  [6] pkd.03@gmail.com
@@ -113,8 +113,8 @@ C:\pk\gcp\genai\cloudrun>
 C:\pk\gcp\genai\cloudrun>gcloud auth list
        Credentialed Accounts
 ACTIVE  ACCOUNT
-        admin@learngcp.xyz
-        gcpadmin@ilearngcp.xyz
+        admin@lrngcp.xyz
+        gcpadmin@ilrngcp.xyz
         john@pkgcp.uk
         k.p@gmail.com
         pkd.01@gmail.com
@@ -146,8 +146,8 @@ Revoked credentials:
  - pkdeltaai.03@gmail.com
        Credentialed Accounts
 ACTIVE  ACCOUNT
-        admin@learngcp.xyz
-        gcpadmin@ilearngcp.xyz
+        adm@lrngcp.xyz
+        gcpadm@ilrngcp.xyz
         john@pkgcp.uk
         k.p@gmail.com
         pkd.01@gmail.com
@@ -163,11 +163,11 @@ WARNING: You also have Application Default Credentials (ADC) set up. If you want
 For information about ADC credentials and gcloud CLI credentials, see https://cloud.google.com/docs/authentication/external/credential-types
 
 Revoked credentials:
- - pkdeltaai.05@gmail.com
+ - pkd.05@gmail.com
        Credentialed Accounts
 ACTIVE  ACCOUNT
-        admin@learngcp.xyz
-        gcpadmin@ilearngcp.xyz
+        admi@lrngcp.xyz
+        gcpadm@ilrngcp.xyz
         john@pkgcp.uk
         k.p@gmail.com
         pkd.01@gmail.com
@@ -187,8 +187,8 @@ ERROR: (gcloud.auth.revoke) Unknown value for [accounts]: pkdeltaai.05@gmail.com
 C:\pk\gcp\genai\cloudrun>gcloud auth list
        Credentialed Accounts
 ACTIVE  ACCOUNT
-        admin@learngcp.xyz
-        gcpadmin@ilearngcp.xyz
+        adm@lrngcp.xyz
+        gcpadm@ilrngcp.xyz
         john@pkgcp.uk
         k.p@gmail.com
         pkd.01@gmail.com
