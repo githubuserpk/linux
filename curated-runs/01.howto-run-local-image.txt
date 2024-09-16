@@ -8,3 +8,24 @@ This is just a server.js file with hello world sample
 Locally you can download it and run server.js 
 > node server.js
 
+main steps:
+=============
+1. clone the repo 
+2. run server.js locally 
+
+detailed steps:
+===============
+gh repo clone githubuserpk/manual-docker
+docker server.js
+
+logs:
+=====
+pkdeltaai_06@cloudshell:~/manual-docker (pkdeltaai-06)$ node server.js 
+Listening on 9000
+New connection
+New connection
+
+Now, open the terminal and change port to 9000 and run it, you will see the output "hello cloud run blah blah" 
+
+
+
