@@ -12,6 +12,7 @@ main steps:
 =============
 1. clone the repo 
 2. run server.js locally 
+3. cleanup: delete image locally 
 
 detailed steps:
 ===============
@@ -34,6 +35,79 @@ gh auth login  # will give you a browser url to login and you need to enter 8 di
 gh api user -q ".login"
 GITHUB_USERNAME=$(gh api user -q ".login")   # output: githubuserpk
 gh repo clone githubuserpk/manual-docker     # to clone manual-docker repo locally 
+
+3. run it locally:
+=================================
+
+docker images	# you will see no images at first 
+docker pull gcr.io/pkdeltaai-06/myapp:latest	# pull image into local docker registry 
+docker images	# you will see output, see logs 
+docker run -p 8080:9000 --name my-container gcr.io/pkdeltaai-06/myapp:latest	# preview on port 8080, see logs 
+
+3. cleanup, delete image locally:
+=================================
+
+docker ps -a	# returns the output process running 
+docker stop e43f311e2f57	# stop the container, see logs 
+docker rm 20d5c0d4f59a		# removes container, see logs 
+
+docker info | greo "Docker Root Dir" # to check where docker has stored locally and the size of the image, see logs docker info
+check disk usage # see logs sudo du 
+
+delete image and check size 
+--
+docker rmi d6b495d78680	# remove docker image, see logs docker rmi 
+gcloud container images list
+
+
+
+logs: 
+REPOSITORY                  TAG       IMAGE ID       CREATED          SIZE
+gcr.io/pkdeltaai-06/myapp   latest    d6b495d78680   17 minutes ago   906MB
+
+output in browser
+Hello Cloud Run 16 sep: v09.48, v10.20, local file updated: 10:54
+
+
+pkdeltaai_06@cloudshell:~/manual-docker (pkdeltaai-06)$ docker ps -a
+CONTAINER ID   IMAGE                              COMMAND                  CREATED         STATUS         PORTS                    NAMES
+9cc13df8e058   gcr.io/pkdeltaai-06/myapp:latest   "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   0.0.0.0:8080->9000/tcp   my-container
+
+
+pkdeltaai_06@cloudshell:~/manual-docker (pkdeltaai-06)$ docker stop 9cc13df8e058
+9cc13df8e058
+
+remove container 
+pkdeltaai_06@cloudshell:~/manual-docker (pkdeltaai-06)$ docker rm 9cc13df8e058
+9cc13df8e058
+pkdeltaai_06@cloudshell:~/manual-docker (pkdeltaai-06)$ docker ps -a
+
+docker info: 
+pkdeltaai_06@cloudshell:~/manual-docker (pkdeltaai-06)$ docker info | grep "Docker Root Dir"
+ Docker Root Dir: /var/lib/docker
+pkdeltaai_06@cloudshell:~/manual-docker (pkdeltaai-06)$ docker system df
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          1         0         906.3MB   906.3MB (100%)
+Containers      0         0         0B        0B
+Local Volumes   0         0         0B        0B
+Build Cache     0         0         0B        0B
+
+sudo du: 
+pkdeltaai_06@cloudshell:~/manual-docker (pkdeltaai-06)$ sudo du -sh /var/lib/docker
+954M    /var/lib/docker
+
+docker rmi - remove the local image 
+docker images # get image id 
+pkdeltaai_06@cloudshell:~/manual-docker (pkdeltaai-06)$ docker rmi d6b495d78680
+Untagged: gcr.io/pkdeltaai-06/myapp:latest
+Untagged: gcr.io/pkdeltaai-06/myapp@sha256:c2917fdf1741050c0f07814af82b780bce88400e610234444444c  #edited
+
+pkdeltaai_06@cloudshell:~/manual-docker (pkdeltaai-06)$ sudo du -sh /var/lib/docker
+564K    /var/lib/docker
+
+
+
+
 
 
 
