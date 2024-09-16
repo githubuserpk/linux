@@ -1,0 +1,5 @@
+pkdeltaai_06@cloudshell:~/manual-docker (pkdeltaai-06)$ gcloud projects get-iam-policy pkdeltaai-06 --flatten="bindings[].members" --format='table(bindings.role)' --filter="bindings.members:$
+(gcloud config get-value account)"
+Your active configuration is: [cloudshell-24140]
+ROLE: roles/aiplatform.user
+ROLE: roles/owner
