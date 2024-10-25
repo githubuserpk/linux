@@ -1,1 +1,1 @@
-sudo netstat -tlnp | grep :80
+sudo netstat -lpant
