@@ -1,0 +1,3 @@
+## list of cloud run services running
+>  gcloud run services list 
+
