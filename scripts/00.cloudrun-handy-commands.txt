@@ -1,3 +1,6 @@
 ## list of cloud run services running
 >  gcloud run services list 
 
+## how to delete a cloud run service that is running
+gcloud run services delete SERVICE_NAME --platform=managed --region=REGION
+
