@@ -11,3 +11,8 @@ gcloud compute zones list
 
 How to find the list of ubuntu images in gcloud
 >gcloud compute images list --filter="name~ubuntu'"
+
+
+## create a compute engine instance 
+
+gcloud compute instances create gcelab2 --machine-type e2-medium --zone=$ZONE
