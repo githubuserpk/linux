@@ -4,3 +4,42 @@
 ## how to delete a cloud run service that is running
 gcloud run services delete SERVICE_NAME --platform=managed --region=REGION
 
+## if you have downloaded the image locally how do i delete it ??
+
+## pulls the image locally 
+docker pull us-central1-docker.pkg.dev/kp-devops/cloud-run-source-deploy/ollama-gemma@sha256:eba8e19e271b93da574acbca3daa4
+
+## docker images list 
+k_p@cloudshell:~/samples/run/ollama-gemma (kp-devops)$ docker images
+REPOSITORY                                                                  TAG       IMAGE ID       CREATED          SIZE
+us-central1-docker.pkg.dev/kp-devops/cloud-run-source-deploy/ollama-gemma   <none>    729ee96cefb9   22 minutes ago   5.01GB
+
+## then, i deleted using gcloud container images delete command 
+krishnarao_pradeep@cloudshell:~/samples/run/ollama-gemma (kp-devops)$ docker images
+REPOSITORY                                                                  TAG       IMAGE ID       CREATED          SIZE
+us-central1-docker.pkg.dev/kp-devops/cloud-run-source-deploy/ollama-gemma   <none>    729ee96cefb9   22 minutes ago   5.01GB
+
+output: 
+WARNING: Successfully resolved tag to sha256, but it is recommended to use sha256 directly.
+Digests:
+- us-central1-docker.pkg.dev/kp-devops/cloud-run-source-deploy/ollama-gemma@sha256:eba8e19e271b93da574acbca3daa43f0a2588c7228b8fdb63f6f8cb7fe20cefa
+  Associated tags:
+ - latest
+Tags:
+- us-central1-docker.pkg.dev/kp-devops/cloud-run-source-deploy/ollama-gemma:latest
+This operation will delete the tags and images identified by the digests above.
+
+Do you want to continue (Y/n)?  Y
+
+
+
+## try 
+docker images docker image ls -a  docker image prune 
+
+
+## remove image 
+docker rmi -f 729ee96cefb9
+
+## docker ps -a
+output: no images found 
+
